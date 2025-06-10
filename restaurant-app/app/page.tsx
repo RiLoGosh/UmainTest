@@ -23,7 +23,10 @@ export default async function RestaurantsPage() {
       <Sidebar />
       <main className='flex-1 md:ml-64 p-8'>
         <OverheadBar filters={filterData.filters}/>
-        <RestaurantList restaurants={data.restaurants} />
+        <div className='flex overflow-y-scroll space-x-2 pb-2'>
+          <RestaurantList restaurants={data.restaurants} />
+        </div>
+        
       </main>
       
       
