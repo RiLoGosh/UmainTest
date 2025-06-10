@@ -22,9 +22,7 @@ const RestaurantCard = ({ restaurant }) => {
           cache: 'no-store'
         });
         let data = await res.json();
-        console.log(data.is_open);
         setOpenStatus(data.is_open);
-        console.log(openStatus);
       } catch (err) {
         console.error(err);
       }
@@ -35,7 +33,7 @@ const RestaurantCard = ({ restaurant }) => {
 
   console.log(openStatus);
   return (
-    <div style={cardStyle}>
+    <div className='flex  items-center justify-center w-80 h-50 p-2'>
       <h1>{restaurant.name}</h1>
       <p>Delivery Time: {restaurant.delivery_time_minutes} min</p>
       <p>

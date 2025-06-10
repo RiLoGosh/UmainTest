@@ -15,7 +15,7 @@ export default function Sidebar() {
 
   return (
     <aside className="hidden md:flex md:flex-col md:fixed md:inset-y-0 md:left-0
-      md:w-64 md:border-r md:bg-white md:shadow-lg p-6 space-y-8"
+      md:w-64 p-6 space-y-8 bg-white"
     >
       <h2 className="text-2xl font-bold">My App</h2>
 
@@ -23,14 +23,14 @@ export default function Sidebar() {
         {nav.map(({ label, href }) => {
           const active = pathname === href;
           return (
-            <Link
+            <button
               key={href}
               href={href}
               className={`px-4 py-2 rounded-lg transition-colors
-                ${active ? 'bg-gray-100 font-medium' : 'hover:bg-gray-50'}`}
+                ${active ? 'bg-gray-100 font-medium' : 'hover:bg-gray-300'}`}
             >
               {label}
-            </Link>
+            </button>
           );
         })}
       </nav>
