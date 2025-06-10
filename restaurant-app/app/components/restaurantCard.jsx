@@ -14,17 +14,19 @@ const cardStyle = {
 
 const RestaurantCard = ({ restaurant }) => {
 
-
+  
   return (
     <div style={cardStyle}>
       <h3>{restaurant.name}</h3>
       <p>Delivery Time: {restaurant.delivery_time_minutes}</p>
       <img 
-      src={PROXY_URL + restaurant.image_url}
+      src={restaurant.image_url}
       alt="new"
       />
     </div>
   );
 };
+
+
 
 export default RestaurantCard;

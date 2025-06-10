@@ -1,4 +1,3 @@
-// app/restaurants/RestaurantList.jsx
 "use client";
 import RestaurantCard from "./restaurantCard";
 
