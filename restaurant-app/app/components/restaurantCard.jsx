@@ -26,7 +26,7 @@ const RestaurantCard = ({ restaurant }) => {
 
   console.log(openStatus);
   return (
-    <div className='flex bg-umainwhite rounded-lg border-solid border-umainstroke border-1  w-80 h-50 p-2'>
+    <div className='flex bg-umainwhite rounded-[8px] border-solid border-umainstroke border-1  w-80 h-50 p-2'>
       <div>
         <h1>
           {restaurant.name}

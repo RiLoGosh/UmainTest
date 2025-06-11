@@ -3,16 +3,15 @@ import Image from "next/image";
 
 export default function MiniCard({ name, image }) {
   return (
-    <div
-      className=" flex items-center justify-between border-1 flex-shrink-0 w-48 h-20 p-2 mr-2 rounded-lg shadow bg-umainwhite"
-    >
-      <div className="text-sm font-medium truncate w-24">{name}</div>
-      <Image
-        src={image}
-        alt=""
-        width={50}
-        height={50}
-      />
+    <div className="flex rounded-[8px] border-solid border-umainstroke border-[0.6px] w-[160px] h-[80px] shadow bg-umainwhite">
+        
+        <div className="text-[14px] w-[77px] h-[14px] top-[16px] left-[12px] p-3">{name}</div>
+        <Image className="left-[90px]"
+            src={image}
+            alt=""
+            width={80}
+            height={80}
+        />
     </div>
   );
 }

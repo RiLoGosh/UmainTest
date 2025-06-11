@@ -22,34 +22,36 @@ export default async function RestaurantsPage() {
   return (
     <div>
       {/* Top - Munchies Image */}
-      <div className="flex flex-col p-10 bg-umainoffwhite ">
-        <div className="">
-          <Image 
-            src="/Munchies.png"
-            width={250}
-            height={250}
-            alt=""
-          />
-        </div>
+      <div className="flex top-[56px] left-[40px] p-10 bg-umainoffwhite ">
+        <Image 
+          src="/Munchies.png"
+          width={273.42}
+          height={40}
+          alt=""
+        />
       </div>
         
 
       {/* Content area - Sidebar + Main Content */}
         <div className="flex bg-umainoffwhite">
           {/* Sidebar */}
-          <div className="bg-umainoffwhite w-64 p-12">
+          <div className="bg-umainoffwhite px-[24px] pb-[24px] top-[144px] left-[40px] ">
             <FilterSidebar filters={filterData.filters}/>
           </div>
 
           {/* Main content */}
-          <main className="flex-1 p-4 w-180">
+          <main className='flex flex-col'>
             {/* Overhead Bar */}
-            <div className="p-4">
+            <div className="top-[144px] left-[299px]">
               <OverheadBar filters={filterData.filters} />
             </div>
 
+            <h1 className='w-[200px] h-[40px] top-[264px] left-[299px] text-[40px] pt-6'>
+                Restaurants
+            </h1>
+
             {/* Restaurant List */}
-            <div className=" h-full w-full p-4">
+            <div className="w-[1015px] h-auto py-15">
               <RestaurantList restaurants={data.restaurants} />
             </div>
           </main>
