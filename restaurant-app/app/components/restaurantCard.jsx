@@ -33,7 +33,7 @@ const RestaurantCard = ({ restaurant }) => {
 
   console.log(openStatus);
   return (
-    <div className='flex  items-center justify-center w-80 h-50 p-2'>
+    <div className='flex bg-umainwhite rounded-lg border-solid border-umainstroke border-1 items-center justify-center w-80 h-50 p-2'>
       <h1>{restaurant.name}</h1>
       <p>Delivery Time: {restaurant.delivery_time_minutes} min</p>
       <p>

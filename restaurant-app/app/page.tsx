@@ -1,9 +1,9 @@
 // app/restaurants/page.jsx
 import { PROXY_URL } from './apiConfig';
 import RestaurantList from './components/restaurantList';
-import Sidebar from './components/sidebarFilter';
 import OverheadBar from './components/overheadBar';
 import Image from 'next/image';
+import FilterSidebar from './components/sidebarFilter';
 
 export default async function RestaurantsPage() {
   let res = await fetch(PROXY_URL + "/restaurants", {
@@ -20,38 +20,46 @@ export default async function RestaurantsPage() {
 
 
   return (
-    <div className="flex flex-col bg-gray-100 min-h-screen">
+    <div>
       {/* Top - Munchies Image */}
-      <div className="p-4">
-        <Image 
-          src="/Munchies.png"
-          width={200}
-          height={200}
-          alt=""
-        />
+      <div className="flex flex-col p-10 bg-umainoffwhite ">
+        <div className="">
+          <Image 
+            src="/Munchies.png"
+            width={250}
+            height={250}
+            alt=""
+          />
+        </div>
       </div>
+        
 
       {/* Content area - Sidebar + Main Content */}
-      <div className="flex flex-1">
-        {/* Sidebar */}
-        <div className="bg-white w-64 p-4">
-          <Sidebar />
+      <div>
+        <div className="flex flex-1 bg-umainoffwhite">
+          {/* Sidebar */}
+          <div className="bg-umainoffwhite w-64 p-4">
+            <FilterSidebar filters={filterData.filters}/>
+          </div>
+
+          {/* Main content */}
+          <main className="flex-1 p-4">
+            {/* Overhead Bar */}
+            <div className="flex flex-wrap pt-4 pb-4">
+              <OverheadBar filters={filterData.filters} />
+            </div>
+
+            {/* Restaurant List */}
+            <div className="flex flex-wrap overflow-y-auto max-h-[calc(100vh-300px)]">
+              <RestaurantList restaurants={data.restaurants} />
+            </div>
+          </main>
         </div>
 
-        {/* Main content */}
-        <main className="flex-1 p-4">
-          {/* Overhead Bar */}
-          <div className="flex flex-wrap pt-4 pb-4">
-            <OverheadBar filters={filterData.filters} />
-          </div>
-
-          {/* Restaurant List */}
-          <div className="flex flex-wrap overflow-y-auto max-h-[calc(100vh-300px)]">
-            <RestaurantList restaurants={data.restaurants} />
-          </div>
-        </main>
       </div>
+      
     </div>
+      
   )
 
     
