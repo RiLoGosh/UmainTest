@@ -2,15 +2,8 @@
 import React from 'react';
 import { PROXY_URL } from '../apiConfig';
 import { useState, useEffect } from 'react';
+import Image from 'next/image';
 
-const cardStyle = {
-  border: '1px solid #ddd',
-  borderRadius: '8px',
-  padding: '16px',
-  margin: '8px',
-  boxShadow: '0 2px 5px rgba(0,0,0,0.1)',
-  width: '250px',
-};
 
 const RestaurantCard = ({ restaurant }) => {
   const [openStatus, setOpenStatus] = useState(false);
@@ -33,16 +26,27 @@ const RestaurantCard = ({ restaurant }) => {
 
   console.log(openStatus);
   return (
-    <div className='flex bg-umainwhite rounded-lg border-solid border-umainstroke border-1 items-center justify-center w-80 h-50 p-2'>
-      <h1>{restaurant.name}</h1>
-      <p>Delivery Time: {restaurant.delivery_time_minutes} min</p>
-      <p>
-        {openStatus ? 'open' : 'closed'}      
+    <div className='flex bg-umainwhite rounded-lg border-solid border-umainstroke border-1  w-80 h-50 p-2'>
+      <div>
+        <h1>
+          {restaurant.name}
+        </h1>
+        <p>
+          Delivery Time: {restaurant.delivery_time_minutes} min
         </p>
-      <img 
+        <p>
+          {openStatus ? 'open' : 'closed'}      
+        </p>
+      </div>
+      
+      <div className='w-40 h-40 position: relative'>
+        <Image 
+        fill
         src={restaurant.image_url}
         alt="new"
-      />
+        />
+      </div>
+      
     </div>
   );
 };

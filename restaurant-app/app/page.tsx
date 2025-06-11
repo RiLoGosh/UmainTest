@@ -35,28 +35,26 @@ export default async function RestaurantsPage() {
         
 
       {/* Content area - Sidebar + Main Content */}
-      <div>
-        <div className="flex flex-1 bg-umainoffwhite">
+        <div className="flex bg-umainoffwhite">
           {/* Sidebar */}
-          <div className="bg-umainoffwhite w-64 p-4">
+          <div className="bg-umainoffwhite w-64 p-12">
             <FilterSidebar filters={filterData.filters}/>
           </div>
 
           {/* Main content */}
-          <main className="flex-1 p-4">
+          <main className="flex-1 p-4 w-180">
             {/* Overhead Bar */}
-            <div className="flex flex-wrap pt-4 pb-4">
+            <div className="p-4">
               <OverheadBar filters={filterData.filters} />
             </div>
 
             {/* Restaurant List */}
-            <div className="flex flex-wrap overflow-y-auto max-h-[calc(100vh-300px)]">
+            <div className="grid grid-cols-3 h-full w-full p-4">
               <RestaurantList restaurants={data.restaurants} />
             </div>
           </main>
         </div>
 
-      </div>
       
     </div>
       
