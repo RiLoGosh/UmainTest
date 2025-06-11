@@ -49,7 +49,7 @@ export default async function RestaurantsPage() {
             </div>
 
             {/* Restaurant List */}
-            <div className="grid grid-cols-3 h-full w-full p-4">
+            <div className=" h-full w-full p-4">
               <RestaurantList restaurants={data.restaurants} />
             </div>
           </main>
