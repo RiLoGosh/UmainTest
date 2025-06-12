@@ -18,6 +18,8 @@ export default async function RestaurantsPage() {
 
   const filterData = await res.json();
 
+  const filterTypes = ["Food Category", "Delivery Time", "Price Range"];
+
 
   return (
     <div>
@@ -36,7 +38,7 @@ export default async function RestaurantsPage() {
         <div className="flex bg-umainoffwhite">
           {/* Sidebar */}
           <div className="bg-umainoffwhite px-[24px] pb-[24px] top-[144px] left-[40px] ">
-            <FilterSidebar filters={filterData.filters}/>
+            <FilterSidebar filterMatrix={filterData.filters} filterTypes={filterTypes}/>
           </div>
 
           {/* Main content */}
