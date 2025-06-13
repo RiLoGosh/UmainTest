@@ -1,7 +1,7 @@
 // components/FilterSidebar.jsx
 import FilterButton from './filterButton'
 
-export default function FilterSidebar({ filterMatrix, filterTypes }) {
+export default function FilterSidebar({ filterMap, filterTypes }) {
   
   let i = 0;
     return (
@@ -11,6 +11,12 @@ export default function FilterSidebar({ filterMatrix, filterTypes }) {
         {filterTypes.map((filter, index) => (
             <div key={index} className="flex flex-col w-auto h-auto mb-2">
                 <h1>{filter}</h1>
+                {filterMap.get(filter).map((category, i) => (
+                    <FilterButton key={i} filterOption={category} className=''/>
+
+                ))}
+
+                
             </div>
         ))}
       

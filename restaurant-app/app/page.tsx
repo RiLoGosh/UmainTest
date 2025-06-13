@@ -17,13 +17,22 @@ export default async function RestaurantsPage() {
   });
 
   const filterData = await res.json();
-
+  const foodCategories = filterData.filters.map((filter: { name: string; }) => filter.name);
+  
   const filterTypes = ["Food Category", "Delivery Time", "Price Range"];
+  const deliveryTimes = ["0-10 min", "10-30 min", "30-60 min", "1 hour+"];
+  const priceRanges = ["$", "$$", "$$$", "$$$$",];
+
+  const filterMap = new Map();
+
+  filterMap.set(filterTypes[0], foodCategories);
+  filterMap.set(filterTypes[1], deliveryTimes);
+  filterMap.set(filterTypes[2], priceRanges);
 
 
   return (
     <div>
-      {/* Top - Munchies Image */}
+      {/* Top - Munchies Title */}
       <div className="flex top-[56px] left-[40px] p-10 bg-umainoffwhite ">
         <Image 
           src="/Munchies.png"
@@ -38,7 +47,7 @@ export default async function RestaurantsPage() {
         <div className="flex bg-umainoffwhite">
           {/* Sidebar */}
           <div className="bg-umainoffwhite px-[24px] pb-[24px] top-[144px] left-[40px] ">
-            <FilterSidebar filterMatrix={filterData.filters} filterTypes={filterTypes}/>
+            <FilterSidebar filterMap={filterMap} filterTypes={filterTypes}/>
           </div>
 
           {/* Main content */}
