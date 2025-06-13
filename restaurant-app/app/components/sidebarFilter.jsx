@@ -6,7 +6,6 @@ export default function FilterSidebar({ filterMap, filterTypes }) {
 
     return (
         
-
         <div className="flex flex-col border-[0.6px] border-umainstroke bg-umainwhite rounded-[10px] w-[239px] h-[764px]">
             <h2 className="text-lg font-semibold w-[49px] h-[24px]">Filter</h2>
             <div>
@@ -14,7 +13,7 @@ export default function FilterSidebar({ filterMap, filterTypes }) {
                     <div
                         key={index}
                         className={`${
-                            index === 0 ? 'flex flex-col' : 'flex flex-row flex-wrap'
+                            index === 0 ? 'flex flex-col gap-[10px]' : 'flex flex-row flex-wrap gap-[16px]'
                         } w-auto h-auto mb-2`}
                     >
                         <h1 className="w-full">{filter}</h1>
