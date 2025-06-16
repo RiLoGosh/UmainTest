@@ -1,33 +1,17 @@
 // app/restaurants/page.jsx
-import { PROXY_URL } from './apiConfig';
+
 import RestaurantList from './components/restaurantList';
 import OverheadBar from './components/overheadBar';
 import Image from 'next/image';
 import FilterSidebar from './components/sidebarFilter';
+import {fetchRestaurants, fetchFilters} from './utilities/api'
+import {buildFilterMap, filterTypes} from './utilities/filtering'
 
 export default async function RestaurantsPage() {
-  let res = await fetch(PROXY_URL + "/restaurants", {
-    cache: 'no-store' // or 'force-cache' or 'revalidate: 60' if needed
-  });
-
-  const data = await res.json();
-
-  res = await fetch(PROXY_URL + "/filter", {
-    cache: 'no-store' // or 'force-cache' or 'revalidate: 60' if needed
-  });
-
-  const filterData = await res.json();
-  const foodCategories = filterData.filters.map((filter: { name: string; }) => filter.name);
-  
-  const filterTypes = ["Food Category", "Delivery Time", "Price Range"];
-  const deliveryTimes = ["0-10 min", "10-30 min", "30-60 min", "1 hour+"];
-  const priceRanges = ["$", "$$", "$$$", "$$$$",];
-
-  const filterMap = new Map();
-
-  filterMap.set(filterTypes[0], foodCategories);
-  filterMap.set(filterTypes[1], deliveryTimes);
-  filterMap.set(filterTypes[2], priceRanges);
+ 
+  const restaurantData = await fetchRestaurants();
+  const filterData = await fetchFilters();
+  const filterMap = buildFilterMap(filterData);
 
 
   return (
@@ -63,7 +47,7 @@ export default async function RestaurantsPage() {
 
             {/* Restaurant List */}
             <div className="w-[1015px] h-auto py-15">
-              <RestaurantList restaurants={data.restaurants} />
+              <RestaurantList restaurants={restaurantData.restaurants} />
             </div>
           </main>
         </div>

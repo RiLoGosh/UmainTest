@@ -1,6 +1,6 @@
 "use client";
 import React from 'react';
-import { PROXY_URL } from '../apiConfig';
+import { PROXY_URL } from '../utilities/apiConfig';
 import { useState, useEffect } from 'react';
 import Image from 'next/image';
 
