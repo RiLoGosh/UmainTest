@@ -33,3 +33,12 @@ export async function fetchFilterId(filter_id) {
     const data = await res.json();
     return data;
 }
+
+export async function fetchPrice(priceId) {
+    const res = await fetch(`${PROXY_URL}/price-range/${priceId}`, {
+        cache: 'no-store',
+    });
+    if (!res.ok) throw new Error("Failed to fetch open status");
+    const data = await res.json();
+    return data;
+}

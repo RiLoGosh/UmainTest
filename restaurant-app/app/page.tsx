@@ -5,7 +5,8 @@ import OverheadBar from './components/overheadBar';
 import Image from 'next/image';
 import FilterSidebar from './components/sidebarFilter';
 import {fetchRestaurants, fetchFilters} from './utilities/api'
-import {buildFilterMap, filterTypes, enrichRestaurantData} from './utilities/filtering'
+import {buildFilterMap, filterTypes} from './utilities/filtering'
+import {enrichRestaurantData} from './utilities/helpers'
 
 export default async function RestaurantsPage() {
  
