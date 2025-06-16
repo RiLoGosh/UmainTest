@@ -13,7 +13,6 @@ export default async function RestaurantsPage() {
   const filterData = await fetchFilters();
   const filterMap = buildFilterMap(filterData);
 
-
   return (
     <div>
       {/* Top - Munchies Title */}

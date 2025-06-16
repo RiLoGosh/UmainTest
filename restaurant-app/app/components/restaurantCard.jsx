@@ -3,28 +3,25 @@ import React from 'react';
 import { PROXY_URL } from '../utilities/apiConfig';
 import { useState, useEffect } from 'react';
 import Image from 'next/image';
+import { fetchOpenStatus } from '@/utilities/api';
 
 
 const RestaurantCard = ({ restaurant }) => {
   const [openStatus, setOpenStatus] = useState(false);
 
   useEffect(() => {
-    const fetchOpenStatus = async () => {
+    const checkOpenStatus = async () => {
       try {
-        let res = await fetch(PROXY_URL + "/open/" + restaurant.id, {
-          cache: 'no-store'
-        });
-        let data = await res.json();
-        setOpenStatus(data.is_open);
+        const isOpen = await fetchOpenStatus(restaurant.id);
+        setOpenStatus(isOpen);
       } catch (err) {
         console.error(err);
       }
     };
 
-    fetchOpenStatus();
-  }, [restaurant.id]); // re-run if restaurant.id changes
+    checkOpenStatus();
+  }, [restaurant.id]);
 
-  console.log(openStatus);
   return (
     <div className='flex bg-umainwhite rounded-[8px] border-solid border-umainstroke border-1  w-80 h-50 p-2'>
       <div>

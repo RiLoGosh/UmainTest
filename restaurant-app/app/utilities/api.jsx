@@ -15,3 +15,12 @@ export async function fetchFilters() {
   if (!res.ok) throw new Error("Failed to fetch filters");
   return res.json();
 }
+
+export async function fetchOpenStatus(restaurantId) {
+  const res = await fetch(`${PROXY_URL}/open/${restaurantId}`, {
+    cache: 'no-store',
+  });
+  if (!res.ok) throw new Error("Failed to fetch open status");
+  const data = await res.json();
+  return data.is_open;
+}
