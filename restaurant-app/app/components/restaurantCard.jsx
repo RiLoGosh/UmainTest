@@ -28,6 +28,9 @@ const RestaurantCard = ({ restaurant }) => {
         <h1>
           {restaurant.name}
         </h1>
+        <h1>
+          Cuisine: {restaurant.foodCategory}
+        </h1>
         <p>
           Delivery Time: {restaurant.delivery_time_minutes} min
         </p>

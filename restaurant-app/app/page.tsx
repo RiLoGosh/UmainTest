@@ -5,13 +5,14 @@ import OverheadBar from './components/overheadBar';
 import Image from 'next/image';
 import FilterSidebar from './components/sidebarFilter';
 import {fetchRestaurants, fetchFilters} from './utilities/api'
-import {buildFilterMap, filterTypes} from './utilities/filtering'
+import {buildFilterMap, filterTypes, enrichRestaurantData} from './utilities/filtering'
 
 export default async function RestaurantsPage() {
  
-  const restaurantData = await fetchRestaurants();
+  const resData = await fetchRestaurants();
   const filterData = await fetchFilters();
   const filterMap = buildFilterMap(filterData);
+  const restaurantData = await enrichRestaurantData(resData.restaurants); 
 
   return (
     <div>
@@ -46,7 +47,7 @@ export default async function RestaurantsPage() {
 
             {/* Restaurant List */}
             <div className="w-[1015px] h-auto py-15">
-              <RestaurantList restaurants={restaurantData.restaurants} />
+              <RestaurantList restaurants={restaurantData} />
             </div>
           </main>
         </div>
