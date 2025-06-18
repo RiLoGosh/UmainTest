@@ -19,10 +19,10 @@ export default function Dashboard({ enrichedRestaurants, filterMap, filterData }
     };
 
     useEffect(() => {
-    console.log('Filters changed:', {
-    selectedCategories,
-    maxDeliveryTimes,
-    selectedPrices,
+        console.log('Filters changed:', {
+        selectedCategories,
+        maxDeliveryTimes,
+        selectedPrices,
     });
     }, [selectedCategories, maxDeliveryTimes, selectedPrices]);
 
