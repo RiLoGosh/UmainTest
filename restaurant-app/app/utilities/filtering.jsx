@@ -22,7 +22,7 @@ export function filterRestaurants(enrichedRestaurants, filters){
 
         // ✅ foodCategory: require ALL selected categories to be present
         const matchesCategory = Array.isArray(foodCategory) && foodCategory.length > 0
-            ? foodCategory.every((selectedCategory) =>
+            ? foodCategory.some((selectedCategory) =>
                 restaurant.foodCategory?.includes(selectedCategory)
                 )
             : true;
