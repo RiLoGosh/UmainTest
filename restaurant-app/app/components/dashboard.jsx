@@ -9,23 +9,25 @@ import { filterRestaurants, filterTypes } from '../utilities/filtering';
 
 export default function Dashboard({ enrichedRestaurants, filterMap, filterData }) {
     const [selectedCategories, setCategory] = useState([]);
-    const [maxDeliveryTimes, setDeliveryTime] = useState([]);
+    const [selectedDeliveryTimes, setDeliveryTime] = useState([]);
     const [selectedPrices, setPrice] = useState([]);
 
     const filters = {
         foodCategory: selectedCategories,
-        maxDeliveryTime: maxDeliveryTimes,
+        maxDeliveryTime: selectedDeliveryTimes,
         priceRange: selectedPrices,
     };
 
     useEffect(() => {
         console.log('Filters changed:', {
         selectedCategories,
-        maxDeliveryTimes,
+        selectedDeliveryTimes,
         selectedPrices,
     });
-    }, [selectedCategories, maxDeliveryTimes, selectedPrices]);
+    }, [selectedCategories, selectedDeliveryTimes, selectedPrices]);
 
+
+    // #TODO Move these three functions to helpers.jsx
     const toggleCategory = (category) => {
         setCategory(prev =>
             prev.includes(category)
@@ -76,6 +78,9 @@ export default function Dashboard({ enrichedRestaurants, filterMap, filterData }
                     toggleCategory={toggleCategory} 
                     toggleDeliveryTime={toggleDeliveryTime}
                     togglePrice={togglePrice}
+                    selectedCategories={selectedCategories}
+                    selectedDeliveryTime={selectedDeliveryTimes}
+                    selectedPrices={selectedPrices}
                 />
                 </div>
 
