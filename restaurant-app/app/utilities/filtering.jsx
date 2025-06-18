@@ -20,17 +20,22 @@ export function filterRestaurants(enrichedRestaurants, filters){
     return enrichedRestaurants.filter((restaurant) => {
         const { foodCategory, priceRange, maxDeliveryTime } = filters;
 
-        const matchesCategory = foodCategory
-        ? restaurant.foodCategory?.includes(foodCategory)
-        : true;
+        // ✅ foodCategory: require ALL selected categories to be present
+        const matchesCategory = Array.isArray(foodCategory) && foodCategory.length > 0
+            ? foodCategory.every((selectedCategory) =>
+                restaurant.foodCategory?.includes(selectedCategory)
+                )
+            : true;
 
-        const matchesDelivery = maxDeliveryTime
-        ? restaurant.deliveryTime <= maxDeliveryTime
-        : true;
+        // ✅ deliveryTime: match if restaurant time is <= selected max
+        const matchesDelivery = typeof maxDeliveryTime === "number"
+            ? restaurant.deliveryTime <= maxDeliveryTime
+            : true;
 
-        const matchesPrice = priceRange
-        ? restaurant.priceRange === priceRange
-        : true;
+        // ✅ priceRange: match ANY of the selected price ranges
+        const matchesPrice = Array.isArray(priceRange) && priceRange.length > 0
+            ? priceRange.includes(restaurant.priceRange)
+            : true;
 
         
 

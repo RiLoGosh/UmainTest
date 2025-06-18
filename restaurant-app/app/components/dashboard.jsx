@@ -8,68 +8,94 @@ import FilterSidebar from './sidebarFilter';
 import { filterRestaurants, filterTypes } from '../utilities/filtering';
 
 export default function Dashboard({ enrichedRestaurants, filterMap, filterData }) {
-  const [selectedCategory, setCategory] = useState(null);
-  const [maxDeliveryTime, setDeliveryTime] = useState(null);
-  const [selectedPrice, setPrice] = useState(null);
+    const [selectedCategories, setCategory] = useState([]);
+    const [maxDeliveryTimes, setDeliveryTime] = useState([]);
+    const [selectedPrices, setPrice] = useState([]);
 
-  const filters = {
-    foodCategory: selectedCategory,
-    maxDeliveryTime: maxDeliveryTime,
-    priceRange: selectedPrice,
-  };
+    const filters = {
+        foodCategory: selectedCategories,
+        maxDeliveryTime: maxDeliveryTimes,
+        priceRange: selectedPrices,
+    };
 
-  useEffect(() => {
-  console.log('Filters changed:', {
-    selectedCategory,
-    maxDeliveryTime,
-    selectedPrice,
-  });
-}, [selectedCategory, maxDeliveryTime, selectedPrice]);
+    useEffect(() => {
+    console.log('Filters changed:', {
+    selectedCategories,
+    maxDeliveryTimes,
+    selectedPrices,
+    });
+    }, [selectedCategories, maxDeliveryTimes, selectedPrices]);
 
-  const filteredRestaurants = filterRestaurants(enrichedRestaurants, filters);
+    const toggleCategory = (category) => {
+        setCategory(prev =>
+            prev.includes(category)
+            ? prev.filter(c => c !== category) // remove
+            : [...prev, category]              // add
+        );
+    };
 
-  return (
-    <div>
-      {/* Top - Munchies Title */}
-      <div className="flex top-[56px] left-[40px] p-10 bg-umainoffwhite ">
-        <Image 
-          src="/Munchies.png"
-          width={273.42}
-          height={40}
-          alt=""
-        />
-      </div>
+    const toggleDeliveryTime = (time) => {
+        setDeliveryTime(prev =>
+            prev.includes(time)
+            ? prev.filter(t => t !== time)
+            : [...prev, time]
+        );
+    };
 
-      {/* Content area - Sidebar + Main Content */}
-      <div className="flex bg-umainoffwhite">
-        {/* Sidebar */}
-        <div className="bg-umainoffwhite px-[24px] pb-[24px] top-[144px] left-[40px] ">
-          <FilterSidebar 
-            filterMap={filterMap} 
-            filterTypes={filterTypes} 
-            setCategory={setCategory} 
-            setDeliveryTime={setDeliveryTime}
-            setPrice={setPrice}
-          />
+    const togglePrice = (price) => {
+        setPrice(prev =>
+            prev.includes(price)
+            ? prev.filter(p => p !== price)
+            : [...prev, price]
+        );
+    };
+
+
+
+    const filteredRestaurants = filterRestaurants(enrichedRestaurants, filters);
+
+    return (
+        <div>
+            {/* Top - Munchies Title */}
+            <div className="flex top-[56px] left-[40px] p-10 bg-umainoffwhite ">
+                <Image 
+                src="/Munchies.png"
+                width={273.42}
+                height={40}
+                alt=""
+                />
+            </div>
+
+            {/* Content area - Sidebar + Main Content */}
+            <div className="flex bg-umainoffwhite">
+                {/* Sidebar */}
+                <div className="bg-umainoffwhite px-[24px] pb-[24px] top-[144px] left-[40px] ">
+                <FilterSidebar 
+                    filterMap={filterMap} 
+                    filterTypes={filterTypes} 
+                    toggleCategory={toggleCategory} 
+                    toggleDeliveryTime={toggleDeliveryTime}
+                    togglePrice={togglePrice}
+                />
+                </div>
+
+                {/* Main content */}
+                <main className='flex flex-col'>
+                {/* Overhead Bar */}
+                <div className="top-[144px] left-[299px]">
+                    <OverheadBar filters={filterData.filters} />
+                </div>
+
+                <h1 className='w-[200px] h-[40px] top-[264px] left-[299px] text-[40px] pt-6'>
+                    Restaurants
+                </h1>
+
+                {/* Restaurant List */}
+                <div className="w-[1015px] h-auto py-15">
+                    <RestaurantList restaurants={filteredRestaurants} />
+                </div>
+                </main>
+            </div>
         </div>
-
-        {/* Main content */}
-        <main className='flex flex-col'>
-          {/* Overhead Bar */}
-          <div className="top-[144px] left-[299px]">
-            <OverheadBar filters={filterData.filters} />
-          </div>
-
-          <h1 className='w-[200px] h-[40px] top-[264px] left-[299px] text-[40px] pt-6'>
-              Restaurants
-          </h1>
-
-          {/* Restaurant List */}
-          <div className="w-[1015px] h-auto py-15">
-            <RestaurantList restaurants={filteredRestaurants} />
-          </div>
-        </main>
-      </div>
-    </div>
-  );
-}
+    );
+    }
