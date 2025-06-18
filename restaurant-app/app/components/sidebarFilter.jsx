@@ -1,7 +1,7 @@
 // components/FilterSidebar.jsx
 import FilterButton from './filterButton'
 
-export default function FilterSidebar({ filterMap, filterTypes, setCategory, setDeliveryTime, setPrice}) {
+export default function FilterSidebar({ filterMap, filterTypes, toggleCategory, toggleDeliveryTime, togglePrice}) {
   
 
     return (
@@ -24,10 +24,10 @@ export default function FilterSidebar({ filterMap, filterTypes, setCategory, set
                             className=""
                             {...
                                 (index === 0
-                                ? { filterFunction: setCategory }
+                                ? { filterFunction: toggleCategory }
                                 : index === 1
-                                ? { filterFunction: setDeliveryTime }
-                                : { filterFunction: setPrice })
+                                ? { filterFunction: toggleDeliveryTime }
+                                : { filterFunction: togglePrice })
                             }
                             />
                         ))}
