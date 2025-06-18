@@ -24,15 +24,17 @@ export function filterRestaurants(enrichedRestaurants, filters){
         ? restaurant.foodCategory?.includes(foodCategory)
         : true;
 
-        const matchesPrice = priceRange
-        ? restaurant.priceRange === priceRange
-        : true;
-
         const matchesDelivery = maxDeliveryTime
         ? restaurant.deliveryTime <= maxDeliveryTime
         : true;
 
-        return matchesCategory && matchesPrice && matchesDelivery;
+        const matchesPrice = priceRange
+        ? restaurant.priceRange === priceRange
+        : true;
+
+        
+
+        return matchesCategory && matchesDelivery && matchesPrice;
   });
 }
 
