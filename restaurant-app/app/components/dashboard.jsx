@@ -9,22 +9,22 @@ import { filterRestaurants, filterTypes } from '../utilities/filtering';
 
 export default function Dashboard({ enrichedRestaurants, filterMap, filterData }) {
   const [selectedCategory, setCategory] = useState(null);
-  const [selectedPrice, setPrice] = useState(null);
   const [maxDeliveryTime, setDeliveryTime] = useState(null);
+  const [selectedPrice, setPrice] = useState(null);
 
   const filters = {
     foodCategory: selectedCategory,
-    priceRange: selectedPrice,
     maxDeliveryTime: maxDeliveryTime,
+    priceRange: selectedPrice,
   };
 
   useEffect(() => {
   console.log('Filters changed:', {
     selectedCategory,
-    selectedPrice,
     maxDeliveryTime,
+    selectedPrice,
   });
-}, [selectedCategory, selectedPrice, maxDeliveryTime]);
+}, [selectedCategory, maxDeliveryTime, selectedPrice]);
 
   const filteredRestaurants = filterRestaurants(enrichedRestaurants, filters);
 
@@ -48,8 +48,8 @@ export default function Dashboard({ enrichedRestaurants, filterMap, filterData }
             filterMap={filterMap} 
             filterTypes={filterTypes} 
             setCategory={setCategory} 
-            setPrice={setPrice}
             setDeliveryTime={setDeliveryTime}
+            setPrice={setPrice}
           />
         </div>
 
