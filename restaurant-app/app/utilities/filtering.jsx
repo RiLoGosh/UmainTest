@@ -15,4 +15,25 @@ export function buildFilterMap(filterData) {
     return filterMap;
 }
 
+export function filterRestaurants(enrichedRestaurants, filters){
+    console.log("filtering...")
+    return enrichedRestaurants.filter((restaurant) => {
+        const { foodCategory, priceRange, maxDeliveryTime } = filters;
+
+        const matchesCategory = foodCategory
+        ? restaurant.foodCategory?.includes(foodCategory)
+        : true;
+
+        const matchesPrice = priceRange
+        ? restaurant.priceRange === priceRange
+        : true;
+
+        const matchesDelivery = maxDeliveryTime
+        ? restaurant.deliveryTime <= maxDeliveryTime
+        : true;
+
+        return matchesCategory && matchesPrice && matchesDelivery;
+  });
+}
+
 

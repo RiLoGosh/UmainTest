@@ -10,7 +10,7 @@ export const enrichRestaurantData = async (restaurantData) => {
   const enriched = await Promise.all(
     restaurantData.map(async (restaurant) => {
       try {
-        // 🔹 Fetch all filter names
+        // Fetch filter info for identifying food category
         const filterResponses = await Promise.all(
           restaurant.filter_ids.map(async (id) => {
             try {
@@ -23,7 +23,7 @@ export const enrichRestaurantData = async (restaurantData) => {
           })
         );
 
-        // 🔹 Fetch price range for this restaurant
+        // Fetch price range 
         let priceRange;
         try {
           const priceData = await fetchPrice(restaurant.price_range_id);
@@ -33,7 +33,7 @@ export const enrichRestaurantData = async (restaurantData) => {
           priceRange = 'Unknown';
         }
 
-        // 🔹 Return enriched restaurant object
+        // Return restaurant with 2 new fields: foodCategory and priceRange
         return {
           ...restaurant,
           foodCategory: filterResponses,

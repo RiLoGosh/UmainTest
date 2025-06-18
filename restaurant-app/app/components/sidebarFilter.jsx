@@ -1,7 +1,7 @@
 // components/FilterSidebar.jsx
 import FilterButton from './filterButton'
 
-export default function FilterSidebar({ filterMap, filterTypes }) {
+export default function FilterSidebar({ filterMap, filterTypes, setCategory, setPrice, setDeliveryTime}) {
   
 
     return (
@@ -18,7 +18,18 @@ export default function FilterSidebar({ filterMap, filterTypes }) {
                     >
                         <h1 className="w-[98px] h-[12px] opacity-40 text-[12px] uppercase">{filter}</h1>
                         {filterMap.get(filter).map((category, i) => (
-                            <FilterButton key={i} filterOption={category} className="" />
+                            <FilterButton 
+                            key={i} 
+                            filterOption={category} 
+                            className=""
+                            {...
+                                (index === 0
+                                ? { filterFunction: setCategory }
+                                : index === 1
+                                ? { filterFunction: setPrice }
+                                : { filterFunction: setDeliveryTime })
+                            }
+                            />
                         ))}
                     </div>
                 ))}
