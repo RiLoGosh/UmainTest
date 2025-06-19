@@ -54,14 +54,18 @@ export default function Dashboard({ enrichedRestaurants, filterMap, filterData }
                     selectedCategories={selectedCategories}
                     selectedDeliveryTimes={selectedDeliveryTimes}
                     selectedPrices={selectedPrices}
-                />
+                    />
                 </div>
 
                 {/* Main content */}
                 <main className='flex flex-col'>
                     {/* Overhead Bar */}
                     <div className="top-[144px] left-[299px]">
-                        <OverheadBar filters={filterData.filters} />
+                        <OverheadBar 
+                        filters={filterData.filters} 
+                        toggleCategory={(category) => toggleCategory(category, setCategory)} 
+                        selectedCategories={selectedCategories}
+                        />
                     </div>
 
                     <h1 className='w-[200px] h-[40px] top-[264px] left-[299px] text-[40px] pt-6'>
