@@ -3,6 +3,7 @@ export const filterTypes = ["Food Category", "Delivery Time", "Price Range"];
 export const deliveryTimes = ["0-10 min", "10-30 min", "30-60 min", "1 hour+"];
 export const priceRanges = ["$", "$$", "$$$", "$$$$"];
 
+// Simple filter map to contain the category and filter options. 
 export function buildFilterMap(filterData) {
   
     const foodCategories = filterData.filters.map((f) => f.name);
@@ -15,26 +16,50 @@ export function buildFilterMap(filterData) {
     return filterMap;
 }
 
+// Dictionary for the various delivery time ranges. Easy to add more time options
+const deliveryRanges = {
+    "0-10 min": [0, 10],
+    "10-30 min": [10, 30],
+    "30-60 min": [30, 60],
+    "1 hour+": [60, Infinity],
+};
+
+// Function for 
 export function filterRestaurants(enrichedRestaurants, filters){
     return enrichedRestaurants.filter((restaurant) => {
         const { foodCategory, priceRange, deliveryTime } = filters;
-        console.log(priceRange);
 
-        // ✅ foodCategory: require ALL selected categories to be present
+        // ✅ foodCategory: match ANY selected food category
         const matchesCategory = Array.isArray(foodCategory) && foodCategory.length > 0
             ? foodCategory.some((selectedCategory) =>
                 restaurant.foodCategory?.includes(selectedCategory)
                 )
             : true;
 
-        // ✅ deliveryTime: match if restaurant's time is inside any selected range
+        // ✅ deliveryTime: match ANY restaurant if delivery time is inside any selected range
         const matchesDelivery = Array.isArray(deliveryTime) && deliveryTime.length > 0
-            ? deliveryTime.some((rangeString) => {
-                const cleaned = rangeString.replace(" min", "").trim(); // remove "min"
-                const [min, max] = cleaned.split("-").map(Number);
-                console.log("cleaned: " + cleaned);
-                return restaurant.delivery_time_minutes >= min && restaurant.delivery_time_minutes <= max;
-            })
+            ? deliveryTime.some((rangeLabel) => {
+                let min = 0;
+                let max = Infinity;
+
+                // Switch matches the saved string, returns range from the dictionary
+                switch (rangeLabel) {
+                    case "0-10 min":
+                    case "10-30 min":
+                    case "30-60 min":
+                    case "1 hour+":
+                    [min, max] = deliveryRanges[rangeLabel];
+                    break;
+                    default:
+                    return false; // Can't match label, return false
+                }
+
+                // Give true for restaurant if within given delivery time range
+                return (
+                    restaurant.delivery_time_minutes >= min &&
+                    restaurant.delivery_time_minutes <= max
+                    );
+                })
             : true;
 
 
@@ -45,6 +70,7 @@ export function filterRestaurants(enrichedRestaurants, filters){
 
         
 
+        // Return this restaurant if foodCategory, deliveryTime, and priceRange match
         return matchesCategory && matchesDelivery && matchesPrice;
   });
 }
