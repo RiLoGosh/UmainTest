@@ -14,7 +14,7 @@ export default function Dashboard({ enrichedRestaurants, filterMap, filterData }
 
     const filters = {
         foodCategory: selectedCategories,
-        maxDeliveryTime: selectedDeliveryTimes,
+        deliveryTime: selectedDeliveryTimes,
         priceRange: selectedPrices,
     };
 
@@ -79,7 +79,7 @@ export default function Dashboard({ enrichedRestaurants, filterMap, filterData }
                     toggleDeliveryTime={toggleDeliveryTime}
                     togglePrice={togglePrice}
                     selectedCategories={selectedCategories}
-                    selectedDeliveryTime={selectedDeliveryTimes}
+                    selectedDeliveryTimes={selectedDeliveryTimes}
                     selectedPrices={selectedPrices}
                 />
                 </div>

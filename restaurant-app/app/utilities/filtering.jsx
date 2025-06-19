@@ -16,9 +16,9 @@ export function buildFilterMap(filterData) {
 }
 
 export function filterRestaurants(enrichedRestaurants, filters){
-    console.log("filtering...")
     return enrichedRestaurants.filter((restaurant) => {
-        const { foodCategory, priceRange, maxDeliveryTime } = filters;
+        const { foodCategory, priceRange, deliveryTime } = filters;
+        console.log(priceRange);
 
         // ✅ foodCategory: require ALL selected categories to be present
         const matchesCategory = Array.isArray(foodCategory) && foodCategory.length > 0
@@ -27,10 +27,16 @@ export function filterRestaurants(enrichedRestaurants, filters){
                 )
             : true;
 
-        // ✅ deliveryTime: match if restaurant time is <= selected max
-        const matchesDelivery = typeof maxDeliveryTime === "number"
-            ? restaurant.deliveryTime <= maxDeliveryTime
+        // ✅ deliveryTime: match if restaurant's time is inside any selected range
+        const matchesDelivery = Array.isArray(deliveryTime) && deliveryTime.length > 0
+            ? deliveryTime.some((rangeString) => {
+                const cleaned = rangeString.replace(" min", "").trim(); // remove "min"
+                const [min, max] = cleaned.split("-").map(Number);
+                console.log("cleaned: " + cleaned);
+                return restaurant.delivery_time_minutes >= min && restaurant.delivery_time_minutes <= max;
+            })
             : true;
+
 
         // ✅ priceRange: match ANY of the selected price ranges
         const matchesPrice = Array.isArray(priceRange) && priceRange.length > 0

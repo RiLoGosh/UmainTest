@@ -9,7 +9,7 @@ export default function FilterSidebar({
   togglePrice,
   selectedCategories,
   selectedPrices,
-  selectedDeliveryTime
+  selectedDeliveryTimes
 }) {
   return (
     <div className="flex flex-col border-[0.6px] border-umainstroke bg-umainwhite rounded-[10px] w-[239px] h-[764px]">
@@ -32,7 +32,7 @@ export default function FilterSidebar({
                 index === 0
                   ? selectedCategories.includes(category)
                   : index === 1
-                  ? selectedDeliveryTime.includes(category)
+                  ? selectedDeliveryTimes.includes(category)
                   : selectedPrices.includes(category);
 
               const filterFunction =
