@@ -1,7 +1,11 @@
 import { fetchFilterId, fetchPrice} from "./api";
 
-
+// Function for adding two fields to each restaurant object in the collection of restaurants.
+// 1. Food Categories
+// 2. Price Ranges
 export const enrichRestaurantData = async (restaurantData) => {
+
+  // Check for array
   if (!Array.isArray(restaurantData)) {
     console.error("Expected restaurantData to be an array but got:", restaurantData);
     return [];
@@ -54,6 +58,9 @@ export const enrichRestaurantData = async (restaurantData) => {
   return enriched;
 };
 
+// 3 toggle functions for either adding a given filter option to the list of selected filters or removing it
+
+// Food Category
 export const toggleCategory = (category, setCategory) => {
     setCategory(prev =>
         prev.includes(category)
@@ -62,6 +69,7 @@ export const toggleCategory = (category, setCategory) => {
     );
 };
 
+// Delivery Time
 export const toggleDeliveryTime = (time, setDeliveryTime) => {
     setDeliveryTime(prev =>
         prev.includes(time)
@@ -70,6 +78,7 @@ export const toggleDeliveryTime = (time, setDeliveryTime) => {
     );
 };
 
+// Price Range
 export const togglePrice = (price, setPrice) => {
     setPrice(prev =>
         prev.includes(price)

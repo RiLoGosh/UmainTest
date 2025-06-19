@@ -3,7 +3,7 @@ export const filterTypes = ["Food Category", "Delivery Time", "Price Range"];
 export const deliveryTimes = ["0-10 min", "10-30 min", "30-60 min", "1 hour+"];
 export const priceRanges = ["$", "$$", "$$$", "$$$$"];
 
-// Simple filter map to contain the category and filter options. 
+// Simple filter map to contain the category and filter options. Mainly used for presenting the data easily
 export function buildFilterMap(filterData) {
   
     const foodCategories = filterData.filters.map((f) => f.name);
@@ -24,19 +24,19 @@ const deliveryRanges = {
     "1 hour+": [60, Infinity],
 };
 
-// Function for 
+// Function that creates and returns the restaurants among enrichedRestaurants that fulfill the given filters.
 export function filterRestaurants(enrichedRestaurants, filters){
     return enrichedRestaurants.filter((restaurant) => {
         const { foodCategory, priceRange, deliveryTime } = filters;
 
-        // ✅ foodCategory: match ANY selected food category
+        // foodCategory: match ANY selected food category
         const matchesCategory = Array.isArray(foodCategory) && foodCategory.length > 0
             ? foodCategory.some((selectedCategory) =>
                 restaurant.foodCategory?.includes(selectedCategory)
                 )
             : true;
 
-        // ✅ deliveryTime: match ANY restaurant if delivery time is inside any selected range
+        // deliveryTime: match ANY restaurant if delivery time is inside any selected range
         const matchesDelivery = Array.isArray(deliveryTime) && deliveryTime.length > 0
             ? deliveryTime.some((rangeLabel) => {
                 let min = 0;
@@ -63,7 +63,7 @@ export function filterRestaurants(enrichedRestaurants, filters){
             : true;
 
 
-        // ✅ priceRange: match ANY of the selected price ranges
+        // priceRange: match ANY of the selected price ranges
         const matchesPrice = Array.isArray(priceRange) && priceRange.length > 0
             ? priceRange.includes(restaurant.priceRange)
             : true;

@@ -9,16 +9,20 @@ import { filterRestaurants, filterTypes } from '../utilities/filtering';
 import { toggleCategory, toggleDeliveryTime, togglePrice } from '../utilities/helpers';
 
 export default function Dashboard({ enrichedRestaurants, filterMap, filterData }) {
+    
+    // We make three state variables using the useState hook to maintain a collection of selected filters
     const [selectedCategories, setCategory] = useState([]);
     const [selectedDeliveryTimes, setDeliveryTime] = useState([]);
     const [selectedPrices, setPrice] = useState([]);
 
+    // filters object holds complete collection of selected filters
     const filters = {
         foodCategory: selectedCategories,
         deliveryTime: selectedDeliveryTimes,
         priceRange: selectedPrices,
     };
 
+    // useful for debugging, reports current filter collection upon state change
     useEffect(() => {
         console.log('Filters changed:', {
         selectedCategories,
@@ -27,6 +31,7 @@ export default function Dashboard({ enrichedRestaurants, filterMap, filterData }
     });
     }, [selectedCategories, selectedDeliveryTimes, selectedPrices]);
 
+    // Make object consisting of all the restaurants that fulfill the selected filters
     const filteredRestaurants = filterRestaurants(enrichedRestaurants, filters);
 
     return (
