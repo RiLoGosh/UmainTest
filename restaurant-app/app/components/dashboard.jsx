@@ -6,6 +6,7 @@ import OverheadBar from './overheadBar';
 import Image from 'next/image';
 import FilterSidebar from './sidebarFilter';
 import { filterRestaurants, filterTypes } from '../utilities/filtering';
+import { toggleCategory, toggleDeliveryTime, togglePrice } from '../utilities/helpers';
 
 export default function Dashboard({ enrichedRestaurants, filterMap, filterData }) {
     const [selectedCategories, setCategory] = useState([]);
@@ -25,34 +26,6 @@ export default function Dashboard({ enrichedRestaurants, filterMap, filterData }
         selectedPrices,
     });
     }, [selectedCategories, selectedDeliveryTimes, selectedPrices]);
-
-
-    // #TODO Move these three functions to helpers.jsx
-    const toggleCategory = (category) => {
-        setCategory(prev =>
-            prev.includes(category)
-            ? prev.filter(c => c !== category) // remove
-            : [...prev, category]              // add
-        );
-    };
-
-    const toggleDeliveryTime = (time) => {
-        setDeliveryTime(prev =>
-            prev.includes(time)
-            ? prev.filter(t => t !== time)
-            : [...prev, time]
-        );
-    };
-
-    const togglePrice = (price) => {
-        setPrice(prev =>
-            prev.includes(price)
-            ? prev.filter(p => p !== price)
-            : [...prev, price]
-        );
-    };
-
-
 
     const filteredRestaurants = filterRestaurants(enrichedRestaurants, filters);
 
@@ -75,9 +48,9 @@ export default function Dashboard({ enrichedRestaurants, filterMap, filterData }
                 <FilterSidebar 
                     filterMap={filterMap} 
                     filterTypes={filterTypes} 
-                    toggleCategory={toggleCategory} 
-                    toggleDeliveryTime={toggleDeliveryTime}
-                    togglePrice={togglePrice}
+                    toggleCategory={(category) => toggleCategory(category, setCategory)} 
+                    toggleDeliveryTime={(time) => toggleDeliveryTime(time, setDeliveryTime)}
+                    togglePrice={(price) => togglePrice(price, setPrice)}
                     selectedCategories={selectedCategories}
                     selectedDeliveryTimes={selectedDeliveryTimes}
                     selectedPrices={selectedPrices}
@@ -86,19 +59,19 @@ export default function Dashboard({ enrichedRestaurants, filterMap, filterData }
 
                 {/* Main content */}
                 <main className='flex flex-col'>
-                {/* Overhead Bar */}
-                <div className="top-[144px] left-[299px]">
-                    <OverheadBar filters={filterData.filters} />
-                </div>
+                    {/* Overhead Bar */}
+                    <div className="top-[144px] left-[299px]">
+                        <OverheadBar filters={filterData.filters} />
+                    </div>
 
-                <h1 className='w-[200px] h-[40px] top-[264px] left-[299px] text-[40px] pt-6'>
-                    Restaurants
-                </h1>
+                    <h1 className='w-[200px] h-[40px] top-[264px] left-[299px] text-[40px] pt-6'>
+                        Restaurants
+                    </h1>
 
-                {/* Restaurant List */}
-                <div className="w-[1015px] h-auto py-15">
-                    <RestaurantList restaurants={filteredRestaurants} />
-                </div>
+                    {/* Restaurant List */}
+                    <div className="w-[1015px] h-auto py-15">
+                        <RestaurantList restaurants={filteredRestaurants} />
+                    </div>
                 </main>
             </div>
         </div>

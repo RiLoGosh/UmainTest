@@ -53,3 +53,27 @@ export const enrichRestaurantData = async (restaurantData) => {
 
   return enriched;
 };
+
+export const toggleCategory = (category, setCategory) => {
+    setCategory(prev =>
+        prev.includes(category)
+            ? prev.filter(c => c !== category)
+            : [...prev, category]
+    );
+};
+
+export const toggleDeliveryTime = (time, setDeliveryTime) => {
+    setDeliveryTime(prev =>
+        prev.includes(time)
+            ? prev.filter(t => t !== time)
+            : [...prev, time]
+    );
+};
+
+export const togglePrice = (price, setPrice) => {
+    setPrice(prev =>
+        prev.includes(price)
+            ? prev.filter(p => p !== price)
+            : [...prev, price]
+    );
+};
