@@ -12,7 +12,7 @@ export default async function RestaurantsPage() {
   const filterData = await fetchFilters();
   const filterMap = buildFilterMap(filterData);
 
-  // Enrich restaurant data with foodCategory and priceRange entries (more API calls)
+  // Enrich restaurant data with foodCategory and priceRange entries (more API calls :( ))
   const enrichedRestaurants = await enrichRestaurantData(resData.restaurants);
 
   return (
