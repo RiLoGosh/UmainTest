@@ -7,20 +7,6 @@ import { fetchOpenStatus } from '@/utilities/api';
 
 
 const RestaurantCard = ({ restaurant }) => {
-  const [openStatus, setOpenStatus] = useState(false);
-
-  useEffect(() => {
-    const checkOpenStatus = async () => {
-      try {
-        const isOpen = await fetchOpenStatus(restaurant.id);
-        setOpenStatus(isOpen);
-      } catch (err) {
-        console.error(err);
-      }
-    };
-
-    checkOpenStatus();
-  }, [restaurant.id]);
 
   return (
     <div className='flex bg-umainwhite rounded-[8px] border-solid border-umainstroke border-1  w-80 h-50 p-2'>
@@ -38,7 +24,7 @@ const RestaurantCard = ({ restaurant }) => {
           Delivery Time: {restaurant.delivery_time_minutes} min
         </p>
         <p>
-          {openStatus ? 'open' : 'closed'}      
+          {restaurant.isOpen ? 'open' : 'closed'}      
         </p>
       </div>
       
