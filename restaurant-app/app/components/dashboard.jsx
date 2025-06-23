@@ -107,7 +107,7 @@ export default function Dashboard({ enrichedRestaurants, filterMap, filterData }
                     </h1>
 
                     {/* Restaurant List */}
-                    <div className="w-full sm:w-[1015px] sm:h-auto sm:py-15">
+                    <div className="w-full sm:w-full sm:h-auto sm:py-15">
                         <RestaurantList restaurants={filteredRestaurants} />
                     </div>
                 </main>

@@ -13,7 +13,7 @@ const RestaurantCard = ({ restaurant }) => {
 
 	return (
 		<div className={`
-			flex flex-col justify-between rounded-2xl shadow-md p-4 w-full h-60 transition duration-300 relative overflow-hidden
+			flex flex-col justify-between rounded-2xl shadow-md p-4 w-[327px] h-[202px] transition duration-300 relative overflow-hidden
 			${isOpen ? 'bg-white text-black' : 'bg-gray-100 text-gray-400'}
 		`}>
 			{/* Status */}
