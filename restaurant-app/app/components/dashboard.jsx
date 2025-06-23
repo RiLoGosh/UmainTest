@@ -3,9 +3,10 @@
 import { useState, useEffect } from 'react';
 import RestaurantList from './restaurantList';
 import OverheadBar from './overheadBar';
+import MiniOverheadBar from './miniOverheadBar'
 import Image from 'next/image';
 import FilterSidebar from './sidebarFilter';
-import { filterRestaurants, filterTypes } from '../utilities/filtering';
+import { filterRestaurants, filterTypes, deliveryTimes } from '../utilities/filtering';
 import { toggleCategory, toggleDeliveryTime, togglePrice } from '../utilities/helpers';
 
 export default function Dashboard({ enrichedRestaurants, filterMap, filterData }) {
@@ -37,7 +38,8 @@ export default function Dashboard({ enrichedRestaurants, filterMap, filterData }
     return (
         <div>
             {/* Top - Munchies Title */}
-            <div className="flex top-[56px] left-[40px] p-10 bg-umainoffwhite ">
+            <div className="flex justify-start px-4 py-6 bg-umainoffwhite
+                            sm:flex sm:top-[56px] sm:left-[40px] sm:p-10">
                 <Image 
                 src="/Munchies.png"
                 width={273.42}
@@ -47,9 +49,9 @@ export default function Dashboard({ enrichedRestaurants, filterMap, filterData }
             </div>
 
             {/* Content area - Sidebar + Main Content */}
-            <div className="flex bg-umainoffwhite">
+            <div className="flex flex-col sm:flex-row bg-umainoffwhite">
                 {/* Sidebar */}
-                <div className="bg-umainoffwhite px-[24px] pb-[24px] top-[144px] left-[40px] ">
+                <aside className="hidden sm:block bg-umainoffwhite px-[24px] pb-[24px] top-[144px] left-[40px] ">
                 <FilterSidebar 
                     filterMap={filterMap} 
                     filterTypes={filterTypes} 
@@ -60,12 +62,23 @@ export default function Dashboard({ enrichedRestaurants, filterMap, filterData }
                     selectedDeliveryTimes={selectedDeliveryTimes}
                     selectedPrices={selectedPrices}
                     />
-                </div>
+                </aside>
 
                 {/* Main content */}
                 <main className='flex flex-col'>
+                    {/* Smaller additional mobile view overhead bar */}
+                    <div className='sm:hidden'>
+                        <MiniOverheadBar
+                        className='sm:hidden'
+                        title="Delivery Time"
+                        filterOptions={deliveryTimes}
+                        filterFunction={(time) => toggleDeliveryTime(time, setDeliveryTime)}
+                        currentlySelected={selectedDeliveryTimes} 
+                        />
+                    </div>
+                    
                     {/* Overhead Bar */}
-                    <div className="top-[144px] left-[299px]">
+                    <div className="sm:top-[144px] sm:left-[299px]">
                         <OverheadBar 
                         filters={filterData.filters} 
                         toggleCategory={(category) => toggleCategory(category, setCategory)} 
@@ -73,12 +86,12 @@ export default function Dashboard({ enrichedRestaurants, filterMap, filterData }
                         />
                     </div>
 
-                    <h1 className='w-[200px] h-[40px] top-[264px] left-[299px] text-[40px] pt-6'>
+                    <h1 className='text-3xl py-6 px-4 sm:w-[200px] sm:h-[40px] sm:top-[264px] sm:left-[299px] sm:text-[40px] sm:pt-6'>
                         Restaurants
                     </h1>
 
                     {/* Restaurant List */}
-                    <div className="w-[1015px] h-auto py-15">
+                    <div className="w-full px-4 sm:w-[1015px] sm:h-auto sm:py-15">
                         <RestaurantList restaurants={filteredRestaurants} />
                     </div>
                 </main>
