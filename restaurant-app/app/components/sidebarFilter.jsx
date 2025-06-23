@@ -12,12 +12,12 @@ export default function FilterSidebar({
   selectedDeliveryTimes
 }) {
   return (
-    <div className="flex flex-col border-[0.6px] border-umainstroke bg-umainwhite rounded-[10px] w-[239px] h-[764px]">
+    <div className="flex flex-col pb-4 border-[0.6px] border-umainstroke bg-umainwhite rounded-[10px] w-[239px] h-[764px]">
 		{/* Title - Filter text */}
-		<h2 className="text-lg text-[24px] p-4 font-semibold">Filter</h2>
+		<h2 className="text-lg text-[24px] px-4 pt-4 font-semibold">Filter</h2>
 
 		{/* Main Content Sidebar */}
-		<div className="pt-6 gap-5">
+		<div className="pt-6 pb-10 gap-5">
 
 			{/* Do this for each row in the filterMap (each filter category). FoodCategory seems to do flex-col. */}
 			{filterTypes.map((filter, index) => (
@@ -26,7 +26,7 @@ export default function FilterSidebar({
 					key={index}
 					className={`${
 					index === 0 ? 'flex flex-col gap-[10px]' : 'flex flex-row flex-wrap gap-[16px]'
-					} w-auto h-auto mb-2 p-4`}>
+					}  mb-2 p-3`}>
 					
 					
 					<h1 className="w-full h-auto text-[12px] uppercase opacity-40 font-bold">
