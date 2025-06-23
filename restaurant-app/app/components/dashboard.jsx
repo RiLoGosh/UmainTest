@@ -36,10 +36,10 @@ export default function Dashboard({ enrichedRestaurants, filterMap, filterData }
     const filteredRestaurants = filterRestaurants(enrichedRestaurants, filters);
 
     return (
-        <div>
+        <div className='flex flex-col'>
             {/* Top - Munchies Title */}
-            <div className="flex justify-start px-4 py-6 bg-umainoffwhite
-                            sm:flex sm:top-[56px] sm:left-[40px] sm:p-10">
+            <div className="relative w-50 flex justify-start px-4 pt-6
+                             sm:flex sm:w-100  sm:left-[40px] sm:p-10">
                 <Image 
                 src="/Munchies.png"
                 width={273.42}
