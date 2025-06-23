@@ -3,9 +3,10 @@
 import { useState, useEffect } from 'react';
 import RestaurantList from './restaurantList';
 import OverheadBar from './overheadBar';
+import MiniOverheadBar from './miniOverheadBar'
 import Image from 'next/image';
 import FilterSidebar from './sidebarFilter';
-import { filterRestaurants, filterTypes } from '../utilities/filtering';
+import { filterRestaurants, filterTypes, deliveryTimes } from '../utilities/filtering';
 import { toggleCategory, toggleDeliveryTime, togglePrice } from '../utilities/helpers';
 
 export default function Dashboard({ enrichedRestaurants, filterMap, filterData }) {
@@ -47,9 +48,9 @@ export default function Dashboard({ enrichedRestaurants, filterMap, filterData }
             </div>
 
             {/* Content area - Sidebar + Main Content */}
-            <div className="flex bg-umainoffwhite">
+            <div className="flex flex-col lg:flex-row bg-umainoffwhite">
                 {/* Sidebar */}
-                <div className="bg-umainoffwhite px-[24px] pb-[24px] top-[144px] left-[40px] ">
+                <aside className="hidden lg:block bg-umainoffwhite px-[24px] pb-[24px] top-[144px] left-[40px] ">
                 <FilterSidebar 
                     filterMap={filterMap} 
                     filterTypes={filterTypes} 
@@ -60,10 +61,20 @@ export default function Dashboard({ enrichedRestaurants, filterMap, filterData }
                     selectedDeliveryTimes={selectedDeliveryTimes}
                     selectedPrices={selectedPrices}
                     />
-                </div>
+                </aside>
 
                 {/* Main content */}
                 <main className='flex flex-col'>
+                    {/* Smaller additional mobile view overhead bar */}
+                    <div className='lg:hidden'>
+                        <MiniOverheadBar
+                        className='lg:hidden'
+                        filterOptions={deliveryTimes}
+                        filterFunction={(time) => toggleDeliveryTime(time, setDeliveryTime)}
+                        currentlySelected={selectedDeliveryTimes} 
+                        />
+                    </div>
+                    
                     {/* Overhead Bar */}
                     <div className="top-[144px] left-[299px]">
                         <OverheadBar 
