@@ -12,7 +12,7 @@ export default function FilterSidebar({
   selectedDeliveryTimes
 }) {
   return (
-    <div className="flex flex-col pb-4 border-[0.6px] border-umainstroke bg-umainwhite rounded-[10px] w-[239px] h-[764px]">
+    <div className="flex flex-col pb-4 border-[0.6px] border-umainstroke bg-umainwhite rounded-[10px] w-[239px] ">
 		{/* Title - Filter text */}
 		<h2 className="text-lg text-[24px] px-4 pt-4 font-semibold">Filter</h2>
 

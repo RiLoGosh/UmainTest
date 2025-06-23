@@ -50,7 +50,7 @@ const RestaurantCard = ({ restaurant }) => {
 
 			{/* Restaurant Name */}
 			<div className="mt-10">
-				<h2 className={`text-xl font-medium ${isOpen ? 'text-black' : 'text-gray-300'}`}>
+				<h2 className={` truncate text-xl font-medium ${isOpen ? 'text-black' : 'text-gray-300'}`}>
 					{restaurant.name}
 				</h2>
 			</div>
