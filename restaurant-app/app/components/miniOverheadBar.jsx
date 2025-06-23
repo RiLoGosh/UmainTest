@@ -2,23 +2,27 @@
 
 import FilterButton from './filterButton';
 
-export default function MiniOverheadBar({ filterOptions, filterFunction, currentlySelected }) {
-  
+export default function MiniOverheadBar({ title, filterOptions, filterFunction, currentlySelected }) {
 	return (
-	<div className="flex overflow-scroll gap-x-[10px] w-auto h-auto">
-		{filterOptions.map((filter) => {
+		<div className="w-full px-4 py-4">
+			{/* Heading */}
+			<h3 className="text-sm font-semibold text-[12px] text-gray-500 uppercase mb-2">{title}</h3>
 
-		const isSelected = currentlySelected.includes(filter);
+			{/* Scrollable filter buttons */}
+			<div className="flex gap-3 overflow-x-auto w-max">
+				{filterOptions.map((filter) => {
+				const isSelected = currentlySelected.includes(filter);
 
-		return (
-			<FilterButton
-                key={filter}
-                filterOption={filter}
-                filterFunction={() => filterFunction(filter)}
-                isSelected={isSelected}
-                />
-		);
-		})}
-	</div>
-);
+				return (
+					<FilterButton
+					key={filter}
+					filterOption={filter}
+					filterFunction={() => filterFunction(filter)}
+					isSelected={isSelected}
+					/>
+				);
+				})}
+			</div>
+		</div>
+	);
 }
