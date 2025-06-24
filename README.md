@@ -27,7 +27,7 @@ https://umain-test.vercel.app/
 ```bash
 # Clone the repo
 git clone https://github.com/RiLoGosh/UmainTest.git
-cd restaurant-app
+cd UmainTest/restaurant-app
 
 # Install dependencies
 npm install
