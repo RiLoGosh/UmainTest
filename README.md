@@ -20,7 +20,7 @@ https://umain-test.vercel.app/
 
 - **Framework**: [Next.js](https://nextjs.org/)
 - **Styling**: [Tailwind CSS](https://tailwindcss.com/)
-- **Deployment**: [Vercel](https://vercel.com/) / [Netlify](https://www.netlify.com/)
+- **Deployment**: [Vercel](https://vercel.com/)
 
 ## 📦 Installation
 
